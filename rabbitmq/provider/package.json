@@ -1,0 +1,17 @@
+{
+  "name": "provider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "provider.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node provider.js"
+  },
+  "author": "dilara",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "pg": "^8.11.3"
+  }
+}

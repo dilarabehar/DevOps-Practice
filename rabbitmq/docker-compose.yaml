@@ -1,0 +1,91 @@
+version: "3.8"
+services: 
+  
+  provider:
+    build:
+      context: ./provider
+    command: sh -c "npm run dev"
+    restart: always
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./provider:/home/app/provider
+      - /home/app/provider/node_modules
+    networks:
+      - my_network
+
+  client:
+    build:
+      context: ./client
+    command: sh -c "npm run dev"
+    restart: always
+    depends_on:
+      - rabbitmq
+      - postgresql
+    volumes:
+      - ./client:/home/app/client
+      - /home/app/client/node_modules
+    networks:
+      - my_network
+
+  app:
+    build:  
+      context: ./db-app
+    command: sh -c "npm run dev"
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - ./db-app:/home/app/db-app
+      - /home/app/db-app/node_modules
+      - ./provider:/home/app/provider
+      - ./client:/home/app/client
+    depends_on:
+      - postgresql
+      - rabbitmq
+    networks:
+      - my_network
+
+  postgresql:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: homework_2
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - my_network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - my_network
+
+networks:
+  my_network:
+    driver: bridge 
+
+  
+    
