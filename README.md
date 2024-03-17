@@ -1,3 +1,3 @@
 # DevOps-Practice
 
-![](DevOps-Practice/.git/ss)
+![](/DevOps-Practice/rabbitmq/ss)
