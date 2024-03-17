@@ -1,3 +1,3 @@
 # DevOps-Practice
 
-![](/DevOps-Practice/rabbitmq/ss)
+![](rabbitmq/ss.png)
