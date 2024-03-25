@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbapp
+  template:
+    metadata:
+      labels:
+        app: dbapp
+    spec:
+      containers:
+      - name: db-app
+        image: dbapp-image
+        ports:
+        - containerPort: 3000

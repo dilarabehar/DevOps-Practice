@@ -1,0 +1,17 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node client.js"
+  },
+  "author": "dilara",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "mysql2": "^3.9.2",
+    "pg": "^8.11.3"
+  }
+}
