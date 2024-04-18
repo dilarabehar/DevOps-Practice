@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+
+  app:
+    build: .
+    container_name: app
+    volumes:
+      - ./:/app
+    environment:
+      - name=value
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+
+  db:
+    container_name: mysql_container
+    image: mysql
+    restart: always
+    environment:  
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog_db
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
+
+  redis:
+    container_name: redis_container
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
