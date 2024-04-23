@@ -5,7 +5,7 @@ const connection = mysql.createPool({
   host: "10.244.0.200",  //Pod IP
   user: "root",
   port: "3306",
-  password: "bukadanmi",
+  password: "root",
   database: "blog_db",
 });
 
