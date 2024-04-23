@@ -1,0 +1,13 @@
+app.get("/", async (req, res) => {
+    const key = "counter";
+    redisClient.incr(key, (err, counter) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Error");
+      }
+      res.send(`Counter: ${counter}`);
+    });
+  });
+  
+  
+  
