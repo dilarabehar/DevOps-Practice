@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+
+  app:
+    build: .
+    container_name: app
+    volumes:
+      - ./:/app
+    environment:
+      - name=value
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+  redis:
+    container_name: redis_container
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
